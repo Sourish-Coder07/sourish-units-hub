@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Essential meta tags for responsive design and SEO -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Professional unit converter supporting temperature, voltage, resistance, current, length, energy, pressure, speed, mass, volume, area, time, frequency, storage, force, angle, luminous intensity, capacitance, and inductance conversions."/>
+  <meta name="keywords" content="unit converter, temperature converter, voltage converter, unit conversion tool"/>
+  <meta name="author" content="Sourish"/>
+  
+  <!-- Page title and favicon -->
+  <title>Sourish Units Hub - Universal Unit Converter</title>
+  <link rel="icon" type="image/png" href="icon-192.png"/>
+  
+  <!-- External resources -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  
+  <!-- Preload critical resources for better performance -->
+  <link rel="preload" href="script.js" as="script"/>
+</head>
+<body>
+  <!-- Main application container with animated styling -->
+  <div class="container animated-border">
+    <!-- Header section with branding -->
+    <header>
+      <h1 class="fade-in">🔧 Sourish Units Hub</h1>
+      <p class="fade-in description">
+        Professional unit converter supporting 19+ categories including temperature, energy, pressure, and more!
+      </p>
+    </header>
+
+    <!-- Theme selection controls -->
+    <div class="theme-switcher fade-in">
+      <label for="themeSelect">🎨 Choose Theme:</label>
+      <select id="themeSelect" aria-label="Select visual theme">
+        <option value="light">☀️ Light Mode</option>
+        <option value="dark">🌙 Dark Mode</option>
+        <option value="rgb">🌈 RGB Glow</option>
+      </select>
+    </div>
+
+    <!-- Main conversion interface -->
+    <main class="converter slide-up">
+      <!-- Category selection -->
+      <div class="input-group">
+        <label for="category">📊 Unit Category:</label>
+        <select id="category" onchange="updateConverter()" aria-label="Select unit category">
+          <option value="temperature">🌡️ Temperature</option>
+          <option value="voltage">⚡ Voltage</option>
+          <option value="resistance">🔌 Resistance</option>
+          <option value="current">🔋 Current</option>
+          <option value="length">📏 Length</option>
+          <option value="energy">💡 Energy</option>
+          <option value="pressure">🌪️ Pressure</option>
+          <option value="speed">🚀 Speed</option>
+          <option value="mass">⚖️ Mass</option>
+          <option value="volume">🧊 Volume</option>
+          <option value="area">📐 Area</option>
+          <option value="time">⏰ Time</option>
+          <option value="frequency">📻 Frequency</option>
+          <option value="storage">💾 Digital Storage</option>
+          <option value="force">💪 Force</option>
+          <option value="angle">📐 Angle</option>
+          <option value="luminous">💡 Luminous Intensity</option>
+          <option value="capacitance">🔋 Capacitance</option>
+          <option value="inductance">🔌 Inductance</option>
+        </select>
+      </div>
+
+      <!-- Input value field -->
+      <div class="input-group">
+        <label for="inputValue">📝 Enter Value:</label>
+        <input 
+          type="number" 
+          id="inputValue" 
+          placeholder="Type a number..." 
+          aria-label="Input value to convert"
+          step="any"
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- Unit conversion selectors -->
+      <div class="conversion-row">
+        <div class="unit-selector">
+          <label for="fromUnit">From:</label>
+          <select id="fromUnit" aria-label="Convert from unit"></select>
+        </div>
+        
+        <div class="conversion-arrow">
+          <span>➡️</span>
+        </div>
+        
+        <div class="unit-selector">
+          <label for="toUnit">To:</label>
+          <select id="toUnit" aria-label="Convert to unit"></select>
+        </div>
+      </div>
+
+      <!-- Convert button -->
+      <button 
+        class="convert-btn" 
+        onclick="convert()"
+        aria-label="Perform unit conversion"
+      >
+        🔄 Convert Now
+      </button>
+
+      <!-- Results display area -->
+      <div class="result-container">
+        <div class="result" id="result" aria-live="polite">
+          Ready to convert! Enter a value above.
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer with attribution -->
+  <footer class="fade-in">
+    <div class="footer-content">
+      <strong class="rgb-glow">⚡ Crafted with precision by Sourish</strong>
+      <p class="footer-note">Supporting 19+ unit categories for professional conversions</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript files -->
+  <script src="script.js"></script>
+  
+  <!-- Service Worker registration for offline functionality -->
+  <script>
+    // Register service worker for PWA capabilities
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registration successful');
+          })
+          .catch(function(error) {
+            console.log('ServiceWorker registration failed: ', error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>

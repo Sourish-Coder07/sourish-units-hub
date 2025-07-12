@@ -1,0 +1,573 @@
+/**
+ * Sourish Units Hub - Enhanced Stylesheet
+ * A comprehensive styling system for the universal unit converter
+ * Features: Multi-theme support, responsive design, smooth animations
+ * Author: Sourish
+ * Version: 2.0 Enhanced
+ */
+
+/* ===== CSS CUSTOM PROPERTIES SYSTEM ===== */
+/* 
+ * Using CSS custom properties (variables) for maintainable theming
+ * This approach allows easy theme switching without code duplication
+ */
+
+/* Light theme - Default configuration for daytime use */
+:root {
+  /* Primary color palette */
+  --primary-bg: #ffffff;
+  --primary-text: #333333;
+  --card-bg: #ffffff;
+  --accent-primary: #2b7a78;
+  --success-color: #1b5e20;
+  --error-color: #d32f2f;
+  
+  /* Layout and spacing variables */
+  --max-container-width: 600px;
+  --standard-padding: 30px;
+  --element-margin: 10px;
+  --border-radius-sm: 8px;
+  --border-radius-lg: 15px;
+  
+  /* Animation and interaction settings */
+  --transition-speed: 0.5s;
+  --quick-transition: 0.3s;
+  --hover-scale: 1.05;
+  --shadow-light: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark theme - Modern dark mode for reduced eye strain */
+body.dark {
+  --primary-bg: #121212;
+  --primary-text: #eeeeee;
+  --card-bg: #1e1e1e;
+  --accent-primary: #00bfa5;
+  --success-color: #00e676;
+  --error-color: #ff5252;
+  --shadow-light: 0 10px 25px rgba(255, 255, 255, 0.1);
+  --shadow-hover: 0 15px 35px rgba(255, 255, 255, 0.15);
+}
+
+/* RGB Gaming theme - High contrast with animated elements */
+body.rgb {
+  --primary-bg: #000000;
+  --primary-text: #ffffff;
+  --card-bg: rgba(0, 0, 0, 0.7);
+  --accent-primary: #ffffff;
+  --success-color: #00ffcc;
+  --error-color: #ff0080;
+  --shadow-light: 0 10px 25px rgba(0, 255, 255, 0.3);
+  --shadow-hover: 0 15px 35px rgba(255, 0, 255, 0.4);
+}
+
+/* ===== GLOBAL FOUNDATION STYLES ===== */
+/* 
+ * Base styles that apply to all elements
+ * Focus on accessibility and performance
+ */
+
+* {
+  box-sizing: border-box; /* Prevents layout issues with padding */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  
+  /* Smooth theme transitions for better user experience */
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease;
+  
+  /* Prevent horizontal scrolling on small screens */
+  overflow-x: hidden;
+}
+
+/* ===== MAIN LAYOUT CONTAINER ===== */
+/* 
+ * Central container with responsive design
+ * Adapts to different screen sizes while maintaining readability
+ */
+
+.container {
+  max-width: var(--max-container-width);
+  margin: 50px auto;
+  padding: var(--standard-padding);
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-light);
+  text-align: center;
+  
+  /* Smooth hover effects for interactive feel */
+  transition: box-shadow var(--transition-speed) ease,
+              transform var(--quick-transition) ease;
+}
+
+.container:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px); /* Subtle lift effect */
+}
+
+/* ===== ANIMATED BORDER SYSTEM ===== */
+/* 
+ * RGB-themed animated border for gaming aesthetic
+ * Only visible in RGB theme mode
+ */
+
+.animated-border {
+  position: relative;
+  border: 2px solid transparent;
+}
+
+body.rgb .animated-border {
+  animation: pulsatingBorder 4s linear infinite;
+}
+
+@keyframes pulsatingBorder {
+  0% { border-color: #ff0000; }
+  16.66% { border-color: #ff8000; }
+  33.33% { border-color: #ffff00; }
+  50% { border-color: #00ff00; }
+  66.66% { border-color: #0080ff; }
+  83.33% { border-color: #8000ff; }
+  100% { border-color: #ff0000; }
+}
+
+/* ===== TYPOGRAPHY SYSTEM ===== */
+/* 
+ * Consistent typography hierarchy
+ * Responsive text sizing for different devices
+ */
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--accent-primary);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ===== FORM ELEMENTS AND INPUTS ===== */
+/* 
+ * Styled form controls with consistent theming
+ * Enhanced accessibility and user experience
+ */
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--primary-text);
+  font-size: 0.95rem;
+}
+
+.converter input,
+.converter select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius-sm);
+  font-size: 16px;
+  font-family: inherit;
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+  
+  /* Focus and interaction states */
+  transition: border-color var(--quick-transition) ease,
+              box-shadow var(--quick-transition) ease,
+              transform var(--quick-transition) ease;
+}
+
+.converter input:focus,
+.converter select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(43, 122, 120, 0.1);
+  transform: translateY(-1px);
+}
+
+.converter input:hover,
+.converter select:hover {
+  border-color: var(--accent-primary);
+}
+
+/* ===== CONVERSION LAYOUT SYSTEM ===== */
+/* 
+ * Specialized layout for unit conversion interface
+ * Responsive design that works on mobile and desktop
+ */
+
+.conversion-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.unit-selector {
+  flex: 1;
+  min-width: 120px; /* Minimum width for mobile */
+}
+
+.conversion-arrow {
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+  font-weight: bold;
+  animation: pulseArrow 2s ease-in-out infinite;
+}
+
+@keyframes pulseArrow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ===== BUTTON STYLING SYSTEM ===== */
+/* 
+ * Modern button design with interactive states
+ * Consistent with overall design language
+ */
+
+.convert-btn {
+  background: linear-gradient(135deg, var(--accent-primary), #1e5e5c);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: var(--border-radius-sm);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  /* Interactive effects */
+  transition: all var(--quick-transition) ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.convert-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.convert-btn:hover {
+  transform: scale(var(--hover-scale));
+  box-shadow: 0 8px 20px rgba(43, 122, 120, 0.3);
+}
+
+.convert-btn:hover::before {
+  left: 100%; /* Shine effect on hover */
+}
+
+.convert-btn:active {
+  transform: scale(0.98);
+}
+
+/* ===== RESULTS DISPLAY SYSTEM ===== */
+/* 
+ * Results area with dynamic styling
+ * Changes appearance based on result type
+ */
+
+.result-container {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: var(--border-radius-sm);
+  background: linear-gradient(135deg, rgba(43, 122, 120, 0.1), rgba(43, 122, 120, 0.05));
+  border: 1px solid rgba(43, 122, 120, 0.2);
+}
+
+.result {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--success-color);
+  margin: 0;
+  padding: 15px;
+  border-radius: var(--border-radius-sm);
+  
+  /* Smooth color transitions for different result states */
+  transition: color var(--quick-transition) ease,
+              transform var(--quick-transition) ease;
+}
+
+.result:not(:empty) {
+  animation: resultAppear 0.6s ease-out;
+}
+
+@keyframes resultAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== THEME SELECTOR STYLING ===== */
+/* 
+ * Theme switcher with enhanced visual feedback
+ * Positioned prominently for easy access
+ */
+
+.theme-switcher {
+  margin: 25px 0;
+  padding: 15px;
+  background: rgba(43, 122, 120, 0.05);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid rgba(43, 122, 120, 0.1);
+}
+
+.theme-switcher label {
+  display: inline-block;
+  margin-right: 15px;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.theme-switcher select {
+  padding: 8px 12px;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid #ddd;
+  background-color: var(--card-bg);
+  color: var(--primary-text);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* ===== FOOTER STYLING ===== */
+/* 
+ * Footer with branded styling and responsive design
+ * Maintains visual hierarchy with main content
+ */
+
+footer {
+  margin-top: 50px;
+  padding: 25px;
+  background: linear-gradient(135deg, var(--accent-primary), #1e5e5c);
+  color: white;
+  text-align: center;
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.footer-content {
+  max-width: var(--max-container-width);
+  margin: 0 auto;
+}
+
+.footer-note {
+  margin-top: 10px;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+/* ===== RGB GLOW TEXT EFFECT ===== */
+/* 
+ * Animated rainbow text effect for RGB theme
+ * Creates engaging visual interest
+ */
+
+.rgb-glow {
+  font-weight: 700;
+  background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff0000);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbowShift 3s ease-in-out infinite;
+}
+
+@keyframes rainbowShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ===== ENTRANCE ANIMATIONS ===== */
+/* 
+ * Smooth entrance animations for better user experience
+ * Adds polish and professional feel
+ */
+
+.fade-in {
+  animation: smoothFadeIn 1s ease-out;
+}
+
+.slide-up {
+  animation: slideUpEntrance 0.8s ease-out;
+}
+
+@keyframes smoothFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE DESIGN SYSTEM ===== */
+/* 
+ * Media queries for different screen sizes
+ * Ensures optimal experience across all devices
+ */
+
+/* Tablet and small desktop adjustments */
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 30px 20px;
+    padding: 25px;
+  }
+  
+  .conversion-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .conversion-arrow {
+    transform: rotate(90deg);
+  }
+  
+  .theme-switcher {
+    text-align: center;
+  }
+  
+  .theme-switcher label {
+    display: block;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+}
+
+/* Mobile phone optimizations */
+@media screen and (max-width: 480px) {
+  .container {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+  
+  .converter input,
+  .converter select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .convert-btn {
+    width: 100%;
+    padding: 16px;
+  }
+  
+  .result {
+    font-size: 1.2rem;
+  }
+  
+  footer {
+    margin-top: 30px;
+    padding: 20px;
+  }
+}
+
+/* High-resolution display optimizations */
+@media screen and (min-resolution: 2dppx) {
+  .container {
+    border: 0.5px solid rgba(43, 122, 120, 0.1);
+  }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+/* 
+ * Enhanced accessibility for screen readers and keyboard navigation
+ * Ensures app is usable by everyone
+ */
+
+/* Focus indicators for keyboard navigation */
+*:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-text: #000000;
+    --primary-bg: #ffffff;
+    --accent-primary: #0066cc;
+  }
+  
+  .container {
+    border: 2px solid #000000;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+/* 
+ * Optimized styles for printing
+ * Ensures readable output on paper
+ */
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .container {
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+  }
+  
+  .convert-btn,
+  .theme-switcher {
+    display: none !important;
+  }
+  
+  .result {
+    color: black !important;
+    border: 1px solid #000 !important;
+  }
+}
